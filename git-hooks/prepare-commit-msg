@@ -1,0 +1,42 @@
+#!C:/Program\ Files/Git/usr/bin/sh.exe
+#
+# Change above to bash on mac and linux
+#
+# Inspects branch name and checks if it contains a ticket number (i.e. ABC-123).
+# If yes, commit message will be automatically prepended with ABC-123 and the actual message will be surrounded with (braces).
+# Final result will look like:
+# ABC-123 (commit message)
+#
+# Useful for looking through git history and relating a commit or group of commits
+# back to a user story.
+#
+
+echo "Starting perpare-commit-msg"
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+# Ensure BRANCH_NAME is not empty and is not in a detached HEAD state (i.e. rebase).
+# SKIP_PREPARE_COMMIT_MSG may be used as an escape hatch to disable this hook,
+# while still allowing other githooks to run.
+if [ ! -z "$BRANCH_NAME" ] && [ "$BRANCH_NAME" != "HEAD" ] && [ "$SKIP_PREPARE_COMMIT_MSG" != 1 ]; then
+
+  PREFIX_PATTERN='[A-Za-z0-9]{2,7}-[0-9]{1,4}'
+
+  [[ $BRANCH_NAME =~ $PREFIX_PATTERN ]]
+
+  PREFIX=${BASH_REMATCH[0]}
+
+  PREFIX_IN_COMMIT=$(grep -c $PREFIX $1)
+
+  # Ensure PREFIX exists in BRANCH_NAME and is not already present in the commit message
+  if [[ -n "$PREFIX" ]] && ! [[ $PREFIX_IN_COMMIT -ge 1 ]]; then
+    # Add prefix and opening brace
+    sed -i.bak -e "1s~^~$PREFIX (~" $1
+    # Add last )
+    sed -i "s/$/)/" $1
+  fi
+
+fi
+
+# Source:
+# https://medium.com/bytelimes/automate-issue-numbers-in-git-commit-messages-2790ae6fe071
