@@ -4,6 +4,7 @@ We use [git](https://git-scm.com/) for our version control.
 ### Branching Model
 With explicity versioned software, like mobile apps and desktop apps, we use the git flow:
 * [Git-flow](https://nvie.com/posts/a-successful-git-branching-model/)
+
   Summary:
   * Master branch is used to represent the current state of production
   * Master branch contains Tags e.g. `1.0.0` for each released version so we can always roll back.
