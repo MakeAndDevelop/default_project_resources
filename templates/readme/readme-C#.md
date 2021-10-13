@@ -2,7 +2,7 @@
 We use [git](https://git-scm.com/) for our version control.
 
 ### Branching Model
-With explicity versioned software, like mobile apps and desktop apps, we use the git flow:
+With explicity versioned software, like mobile apps and desktop apps, we use the git-flow:
 * [Git-flow](https://nvie.com/posts/a-successful-git-branching-model/)
 
   Summary:
@@ -12,15 +12,17 @@ With explicity versioned software, like mobile apps and desktop apps, we use the
   * Feature branches are used to develop new features. In large features Task branches can be used.
   * Bugfix branches are used to fix bugs on develop
   * Hotfix branches are used to fix bugs on production/master.
+  * Release branches are used to prepare all release related work.
+  * Once a release branch is merged in master a tag is created for that version.
 
-In continious deliverd web apps we use the githubflow:
+In continious deliverd web apps we use the github-flow:
 * [Github-flow](https://guides.github.com/introduction/flow/)
 
 ### Pull Requests (PR)
 The PR flow is an extensions to the flows described above.
 * Directly pushing to develop branch and master branch is prohibited and enforced by branch policies.
 * Feature/Bugfix/Hotfix branches are merged in respectivally develop and master branch with Pull Requests.
-* Pull Request are reviewed by two other developers, if the team size allows for this.
+* Pull Request are reviewed by at least two other developers, if the team size allows for this.
 
 ## Coding Guidelines
 We code in compliance to the Microsoft guidelines, conventions and standards for C# development. These guidelines are:
