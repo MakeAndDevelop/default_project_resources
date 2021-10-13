@@ -1,6 +1,7 @@
 ## Branching strategy
 With explicity versioned software, like mobile apps and desktop apps, we use the git flow:
 * [Git-flow](https://nvie.com/posts/a-successful-git-branching-model/)
+
 In continious deliverd web apps we use the githubflow:
 * [Github-flow](https://guides.github.com/introduction/flow/)
 
