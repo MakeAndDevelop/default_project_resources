@@ -20,7 +20,7 @@ In continious deliverd web apps we use the github-flow:
 
 ### Pull Requests (PR)
 The PR flow is an extensions to the flows described above.
-* Directly pushing to develop branch and master branch is prohibited and enforced by branch policies.
+* Directly pushing to develop branch and master branch is prohibited by branch policies.
 * Feature/Bugfix/Hotfix branches are merged in respectivally develop and master branch with Pull Requests.
 * Pull Request are reviewed by at least two other developers, if the team size allows for this.
 
