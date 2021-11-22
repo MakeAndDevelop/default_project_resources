@@ -1,0 +1,50 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Build and Test Develop
+defaults:
+  run:
+    # Optional: set the working directory to the flutter project root
+    # working-directory: src
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Checkout code
+    steps:
+    - uses: actions/checkout@v1
+
+    # Setup Flutter environment on the build agent
+    - name: Install Flutter
+      uses: subosito/flutter-action@v1.5.3
+      with:
+        flutter-version: '2.5.3'
+
+    # Install flutter dependencies
+    - name: Install app dependencies
+      run: flutter pub get
+
+    # Verify the use of 'flutter format' for this change.
+    - name: Verify formatting
+      run: flutter format --output=none --set-exit-if-changed .
+
+    # Flutter analyze to check for unnoticed code issues. 
+    # Consider passing '--fatal-infos' for slightly stricter analysis.
+    - name: Analyze project source
+      run: flutter analyze
+
+    # Run tests      
+    - name: Test app
+      run: flutter test --coverage
+    
+    # Optional publish code coverage to external code coverage tool
+
+# ToDo: Build and publish .apk and .ipa
